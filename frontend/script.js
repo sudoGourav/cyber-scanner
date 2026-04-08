@@ -1,13 +1,29 @@
 async function loadResults() {
-    const res = await fetch("../result.json");
-    const data = await res.json();
+    const input = document.getElementById("urlInput").value;
 
-    let html = `
-        <h2>Target: ${data.target}</h2>
-        <p>Open Ports: ${data.open_ports.join(", ")}</p>
-        <p>Missing Headers: ${data.missing_headers.join(", ")}</p>
-        <h3>Risk Level: ${data.risk_level}</h3>
-    `;
+    if (!input) {
+        alert("Please enter a website");
+        return;
+    }
 
-    document.getElementById("output").innerHTML = html;
+    try {
+        const res = await fetch("../result.json");
+        const data = await res.json();
+
+        let riskClass = data.risk_level.toLowerCase();
+
+        let html = `
+            <div class="card">
+                <h2>Target: ${input}</h2>
+                <p><strong>Open Ports:</strong> ${data.open_ports.join(", ") || "None"}</p>
+                <p><strong>Missing Headers:</strong> ${data.missing_headers.join(", ") || "None"}</p>
+                <h3 class="${riskClass}">Risk Level: ${data.risk_level}</h3>
+            </div>
+        `;
+
+        document.getElementById("output").innerHTML = html;
+
+    } catch (error) {
+        document.getElementById("output").innerHTML = "<p>Error loading results</p>";
+    }
 }
