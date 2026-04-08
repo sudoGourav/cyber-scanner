@@ -1,34 +1,27 @@
+function handleInput(event) {
+    if (event.key === "Enter") {
+        loadResults();
+    }
+}
+
 async function loadResults() {
     const input = document.getElementById("urlInput").value.trim();
 
-    // Validate input
     if (!input) {
-        alert("Please enter a website (e.g., google.com)");
+        alert("Enter a website (e.g., google.com)");
         return;
     }
 
-    // Show loading state
+    // Show loading
     document.getElementById("output").innerHTML = "<p>⏳ Scanning...</p>";
 
     try {
-        // Fetch result.json (must be in same folder)
+        // IMPORTANT: result.json must be in SAME folder
         const res = await fetch("result.json");
-
-        if (!res.ok) {
-            throw new Error("Failed to load result.json");
-        }
-
         const data = await res.json();
 
-        // Determine risk color
-        let riskClass = "low";
-        if (data.risk_level.toLowerCase() === "medium") {
-            riskClass = "medium";
-        } else if (data.risk_level.toLowerCase() === "high") {
-            riskClass = "high";
-        }
+        let riskClass = data.risk_level.toLowerCase();
 
-        // Handle empty values
         const ports = data.open_ports.length > 0 
             ? data.open_ports.join(", ") 
             : "None";
@@ -37,7 +30,6 @@ async function loadResults() {
             ? data.missing_headers.join(", ") 
             : "None";
 
-        // Build UI
         let html = `
             <div class="card">
                 <h2>🌐 Target: ${input}</h2>
@@ -50,8 +42,7 @@ async function loadResults() {
         document.getElementById("output").innerHTML = html;
 
     } catch (error) {
-        console.error(error);
         document.getElementById("output").innerHTML =
-            "<p style='color:red;'>❌ Error loading scan results. Make sure result.json exists.</p>";
+            "<p style='color:red;'>❌ Error loading results</p>";
     }
 }

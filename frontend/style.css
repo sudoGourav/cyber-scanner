@@ -14,18 +14,19 @@ h1 {
 }
 
 input {
-    padding: 10px;
-    width: 250px;
-    border-radius: 5px;
+    padding: 12px;
+    width: 280px;
+    border-radius: 6px;
     border: none;
+    outline: none;
 }
 
 button {
-    padding: 10px 20px;
+    padding: 12px 20px;
     margin-left: 10px;
     background: #22c55e;
     border: none;
-    border-radius: 5px;
+    border-radius: 6px;
     color: white;
     cursor: pointer;
 }
@@ -42,8 +43,8 @@ button:hover {
     background: #1e293b;
     padding: 20px;
     margin: 20px auto;
-    width: 300px;
-    border-radius: 10px;
+    width: 320px;
+    border-radius: 12px;
 }
 
 .low {

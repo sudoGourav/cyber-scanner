@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Web Vulnerability Scanner</title>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -9,7 +10,13 @@
     <h1>🔐 Web Vulnerability Scanner</h1>
 
     <div class="container">
-        <input type="text" id="urlInput" placeholder="Enter website (e.g., google.com)">
+        <input 
+            type="text" 
+            id="urlInput" 
+            placeholder="Enter website (e.g., google.com)"
+            onkeyup="handleInput(event)"
+        >
+
         <button onclick="loadResults()">Scan</button>
 
         <div id="output"></div>
