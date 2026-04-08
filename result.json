@@ -1,0 +1,13 @@
+{
+    "target": "tryhackme.com",
+    "open_ports": [
+        80,
+        443
+    ],
+    "missing_headers": [
+        "X-Frame-Options",
+        "Content-Security-Policy",
+        "Strict-Transport-Security"
+    ],
+    "risk_level": "Medium"
+}
